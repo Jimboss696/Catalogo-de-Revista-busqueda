@@ -10,20 +10,20 @@ namespace Catalogo_de_Revista_busqueda
     {
         static void Main()
         {
-            // 1. Crear un catálogo de revistas con 10 títulos
-            List<string> catalogo = new List<string>  // Creación de una lista de tipo string para almacenar los títulos de las revistas
-        {
-            "Estadio",  // Título de revista 1
-            "Time",  // Título de revista 2
-            "Hogar",  // Título de revista 3
-            "Vistazo",  // Título de revista 4
-            "Pyx Art",  // Título de revista 5
-            "VITAE",  // Título de revista 6
-            "Locura",  // Título de revista 7
-            "El cometa",  // Título de revista 8
-            "Gamer",  // Título de revista 9
-            "Estructura de datos"  // Título de revista 10
-        };
+            // 1. Crear un catálogo de revistas utilizando un árbol binario de búsqueda
+            ArbolBinarioBusqueda catalogo = new ArbolBinarioBusqueda();  // Instancia del árbol binario de búsqueda
+
+            // Insertar títulos en el árbol
+            catalogo.Insertar("Estadio");
+            catalogo.Insertar("Time");
+            catalogo.Insertar("Hogar");
+            catalogo.Insertar("Vistazo");
+            catalogo.Insertar("Pyx Art");
+            catalogo.Insertar("VITAE");
+            catalogo.Insertar("Locura");
+            catalogo.Insertar("El cometa");
+            catalogo.Insertar("Gamer");
+            catalogo.Insertar("Estructura de datos");
 
             // Variable para controlar la salida del programa
             bool salir = false;
@@ -50,8 +50,8 @@ namespace Catalogo_de_Revista_busqueda
                         Console.Write("Ingrese el título que desea buscar: ");  // Solicitar el título a buscar
                         string tituloBuscado = Console.ReadLine();  // Capturar el título que el usuario ingresa
 
-                        // Llamar a la función de búsqueda iterativa para encontrar el título
-                        if (BusquedaIterativa(catalogo, tituloBuscado))  // Si el título se encuentra
+                        // Llamar al método de búsqueda en el árbol binario
+                        if (catalogo.Buscar(tituloBuscado))  // Si el título se encuentra
                         {
                             Console.ForegroundColor = ConsoleColor.DarkGray;
                             Console.WriteLine("Resultado de búsqueda: Encontrado");  // Mostrar que el título fue encontrado
@@ -72,21 +72,6 @@ namespace Catalogo_de_Revista_busqueda
                         break;  // Terminar el caso por defecto
                 }
             }
-        }
-
-        // Método para realizar una búsqueda iterativa en la lista de revistas
-        static bool BusquedaIterativa(List<string> catalogo, string titulo)
-        {
-            // Recorrer cada elemento (revista) en el catálogo
-            foreach (string revista in catalogo)
-            {
-                // Compara el título buscado con el título de la revista actual, ignorando mayúsculas y minúsculas
-                if (revista.Equals(titulo, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;  // Si el título es igual, retorna verdadero (encontrado)
-                }
-            }
-            return false;  // Si no se encuentra en toda la lista, retorna falso (no encontrado)
         }
     }
 }
